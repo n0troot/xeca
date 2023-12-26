@@ -10,11 +10,8 @@ Note: Please place your custom AMSI bypass in `src/assets/amsi-bypass.ps1`.
   * [Install](#install)
   * [How It Works](#how-it-works)
   * [Mitigations](#mitigations)
-  * [Examples](#examples)
-    + [Covenant](#covenant)
-    + [Empire](#empire)
-    + [Merlin](#merlin)
-    + [Sliver](#sliver)
+  * [Usage](#Usage)
+    + [Sliver](#Sliver)
   * [Acknowledgements](#acknowledgements)
   * [License](#license)
 
